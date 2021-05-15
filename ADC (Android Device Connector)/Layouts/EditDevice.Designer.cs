@@ -48,6 +48,9 @@ namespace ADC__Android_Device_Connector_.Layouts
             this.tbNombre.TabIndex = 1;
             this.tbNombre.Text = "Ingrese el nombre del dispositivo.";
             this.tbNombre.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.tbNombre.Click += new System.EventHandler(this.tbNombre_Click);
+            this.tbNombre.Leave += new System.EventHandler(this.tbNombre_Leave);
+            this.tbNombre.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.tbNombre_PreviewKeyDown);
             // 
             // tbIp
             // 
@@ -60,6 +63,8 @@ namespace ADC__Android_Device_Connector_.Layouts
             this.tbIp.TabIndex = 2;
             this.tbIp.Text = "Ingrese la ip del dispositivo.";
             this.tbIp.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.tbIp.Click += new System.EventHandler(this.tbIp_Click);
+            this.tbIp.Leave += new System.EventHandler(this.tbIp_Leave);
             // 
             // butEditDevice
             // 
@@ -72,6 +77,8 @@ namespace ADC__Android_Device_Connector_.Layouts
             this.butEditDevice.TabIndex = 3;
             this.butEditDevice.Text = "Editar dispositivo";
             this.butEditDevice.UseVisualStyleBackColor = false;
+            this.butEditDevice.Click += new System.EventHandler(this.butEditDevice_Click);
+            this.butEditDevice.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.butEditDevice_PreviewKeyDown);
             // 
             // pbIcon
             // 
@@ -82,6 +89,7 @@ namespace ADC__Android_Device_Connector_.Layouts
             this.pbIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbIcon.TabIndex = 0;
             this.pbIcon.TabStop = false;
+            this.pbIcon.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.pbIcon_PreviewKeyDown);
             // 
             // EditDevice
             // 
@@ -97,6 +105,7 @@ namespace ADC__Android_Device_Connector_.Layouts
             this.Name = "EditDevice";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Editar dispositivo.";
+            this.Load += new System.EventHandler(this.EditDevice_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pbIcon)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

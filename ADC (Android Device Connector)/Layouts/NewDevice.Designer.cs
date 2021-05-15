@@ -46,6 +46,7 @@ namespace ADC__Android_Device_Connector_.Layouts
             this.pbImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbImage.TabIndex = 0;
             this.pbImage.TabStop = false;
+            this.pbImage.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.pbImage_PreviewKeyDown);
             // 
             // butDevices
             // 
@@ -58,6 +59,8 @@ namespace ADC__Android_Device_Connector_.Layouts
             this.butDevices.TabIndex = 1;
             this.butDevices.Text = "Agregar dispositivo";
             this.butDevices.UseVisualStyleBackColor = false;
+            this.butDevices.Click += new System.EventHandler(this.butDevices_Click);
+            this.butDevices.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.butDevices_PreviewKeyDown);
             // 
             // tbNombre
             // 
@@ -70,6 +73,9 @@ namespace ADC__Android_Device_Connector_.Layouts
             this.tbNombre.TabIndex = 2;
             this.tbNombre.Text = "Ingrese el nombre del dispositivo.";
             this.tbNombre.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.tbNombre.Click += new System.EventHandler(this.tbNombre_Click);
+            this.tbNombre.Leave += new System.EventHandler(this.tbNombre_Leave);
+            this.tbNombre.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.tbNombre_PreviewKeyDown);
             // 
             // tbIp
             // 
@@ -82,6 +88,8 @@ namespace ADC__Android_Device_Connector_.Layouts
             this.tbIp.TabIndex = 3;
             this.tbIp.Text = "Ingrese la ip del dispositivo.";
             this.tbIp.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.tbIp.Click += new System.EventHandler(this.tbIp_Click);
+            this.tbIp.Leave += new System.EventHandler(this.tbIp_Leave);
             // 
             // NewDevice
             // 

@@ -97,6 +97,7 @@ namespace ADC__Android_Device_Connector_.Layouts
             this.butDevices.TabIndex = 2;
             this.butDevices.Text = "Dispositivos conectados";
             this.butDevices.UseVisualStyleBackColor = false;
+            this.butDevices.Click += new System.EventHandler(this.butDevices_Click);
             // 
             // butConnect
             // 
@@ -110,6 +111,7 @@ namespace ADC__Android_Device_Connector_.Layouts
             this.butConnect.TabIndex = 3;
             this.butConnect.Text = "Conectar";
             this.butConnect.UseVisualStyleBackColor = false;
+            this.butConnect.Click += new System.EventHandler(this.butConnect_Click);
             // 
             // butKillServer
             // 
@@ -123,6 +125,7 @@ namespace ADC__Android_Device_Connector_.Layouts
             this.butKillServer.TabIndex = 4;
             this.butKillServer.Text = "Reiniciar conexiones";
             this.butKillServer.UseVisualStyleBackColor = false;
+            this.butKillServer.Click += new System.EventHandler(this.butKillServer_Click);
             // 
             // butScreenMirror
             // 
@@ -136,6 +139,7 @@ namespace ADC__Android_Device_Connector_.Layouts
             this.butScreenMirror.TabIndex = 5;
             this.butScreenMirror.Text = "Transmitir pantalla";
             this.butScreenMirror.UseVisualStyleBackColor = false;
+            this.butScreenMirror.Click += new System.EventHandler(this.butScreenMirror_Click);
             // 
             // butClear
             // 
@@ -149,6 +153,7 @@ namespace ADC__Android_Device_Connector_.Layouts
             this.butClear.TabIndex = 6;
             this.butClear.Text = "Limpiar terminal";
             this.butClear.UseVisualStyleBackColor = false;
+            this.butClear.Click += new System.EventHandler(this.butClear_Click);
             // 
             // butPath
             // 
@@ -161,6 +166,7 @@ namespace ADC__Android_Device_Connector_.Layouts
             this.butPath.TabIndex = 7;
             this.butPath.Text = "Ruta Scrcpy";
             this.butPath.UseVisualStyleBackColor = false;
+            this.butPath.Click += new System.EventHandler(this.butPath_Click);
             // 
             // rtbCMD
             // 
@@ -340,6 +346,7 @@ namespace ADC__Android_Device_Connector_.Layouts
             this.pbEliminarDispositivo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbEliminarDispositivo.TabIndex = 10;
             this.pbEliminarDispositivo.TabStop = false;
+            this.pbEliminarDispositivo.Click += new System.EventHandler(this.pbEliminarDispositivo_Click);
             // 
             // pbNuevoDispositivo
             // 
@@ -389,7 +396,7 @@ namespace ADC__Android_Device_Connector_.Layouts
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Home";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "ADC (Android Device Connector) v0.1";
+            this.Text = "ADC (Android Device Connector) v0.8";
             this.Load += new System.EventHandler(this.Home_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGVDevices)).EndInit();
             this.gbOpciones.ResumeLayout(false);
