@@ -20,9 +20,9 @@ namespace ADC__Android_Device_Connector_.Layouts
         private String txtNombre = "Ingrese el nombre del dispositivo.";
         private String txtIp = "Ingrese la ip del dispositivo.";
         DataGridView tDGV;
+
         //Objetos
         DataBase.Device device = new DataBase.Device();
-
 
         //setDGV
         public DataGridView setDGV(DataGridView dGV) {
@@ -30,24 +30,29 @@ namespace ADC__Android_Device_Connector_.Layouts
             return dGV;
         }
 
+        //Evento click para editar el dispositivo.
         private void butEditDevice_Click(object sender, EventArgs e) {
+            
             //Variables
             nombre = tbNombre.Text;
             ip = tbIp.Text;
 
             device.editarDispositivo(id, nombre, ip, tbNombre, tbIp);
-            MessageBox.Show("Ya pase aqui");
             device.cargarDispositivos(tDGV, tabla);
             this.Dispose(); 
         }
 
+        //Evento load para el Form.
         private void EditDevice_Load(object sender, EventArgs e) {
+            
             device.fillData(id, tbNombre, tbIp);
             this.ActiveControl = pbIcon;
             tbNombre.ForeColor = Color.White;
             tbIp.ForeColor = Color.White;
+        
         }
 
+        //Evento leave para reiniciar los textos en caso de destar vacios.
         private void tbNombre_Leave(object sender, EventArgs e) {
             if(tbNombre.Text == "") {
                 reinicarTexto(tbNombre, txtNombre);
@@ -59,12 +64,12 @@ namespace ADC__Android_Device_Connector_.Layouts
             InitializeComponent();
         }
 
+        //Evento leave para reiniciar los textos en caso de destar vacios.
         private void tbIp_Leave(object sender, EventArgs e) {
             if(tbIp.Text == "") {
                 reinicarTexto(tbIp, txtIp);
             }
         }
-
 
         //Metodo para reinicar los textos por defecto.
         public void reinicarTexto(TextBox tb, String text) {
@@ -79,18 +84,17 @@ namespace ADC__Android_Device_Connector_.Layouts
 
         }
 
+        //Evento click para el TB del nombre.
         private void tbNombre_Click(object sender, EventArgs e) {
             cambiarColorTexto(tbNombre, txtNombre);
         }
 
+        //Evento click para el TB de la ip.
         private void tbIp_Click(object sender, EventArgs e) {
             cambiarColorTexto(tbIp, txtIp);
         }
 
-        private void tbIp_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e) {
-
-        }
-
+        //Evento para ver que tecla se presiona.
         private void pbIcon_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e) {
 
             //Verificamos si se preciono la tecla TAB.
@@ -100,6 +104,7 @@ namespace ADC__Android_Device_Connector_.Layouts
             
         }
 
+        //Evento para ver que tecla se presiona.
         private void butEditDevice_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e) {
 
             //Verificamos si se preciono la tecla TAB.
@@ -109,19 +114,14 @@ namespace ADC__Android_Device_Connector_.Layouts
 
         }
 
+        //Evento para ver que tecla se presiona.
         private void tbNombre_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e) {
+            
             //Verificamos si se preciono la tecla TAB.
             if(e.KeyData == Keys.Tab) {
                 cambiarColorTexto(tbIp, txtIp);
             }
-        }
 
-        private void tbNombre_TextChanged(object sender, EventArgs e) {
-            reinicarTexto(tbNombre, txtNombre);
-        }
-
-        private void tbIp_TextChanged(object sender, EventArgs e) {
-            reinicarTexto(tbIp, txtIp);
         }
 
         //Metodo para cambiar el color y limpiar el TB.

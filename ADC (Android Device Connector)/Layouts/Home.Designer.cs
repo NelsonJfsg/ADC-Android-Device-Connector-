@@ -396,7 +396,7 @@ namespace ADC__Android_Device_Connector_.Layouts
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Home";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "ADC (Android Device Connector) v0.8";
+            this.Text = "ADC (Android Device Connector) v1.0";
             this.Load += new System.EventHandler(this.Home_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGVDevices)).EndInit();
             this.gbOpciones.ResumeLayout(false);

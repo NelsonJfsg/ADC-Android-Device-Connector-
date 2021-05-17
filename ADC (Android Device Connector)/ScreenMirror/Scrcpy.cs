@@ -28,7 +28,6 @@ namespace ADC__Android_Device_Connector_.Scrcpy {
                 //Aplicar comando para subir los datos.
                 SQLiteCommand comando = new SQLiteCommand(query, con);
                 comando.ExecuteNonQuery();
-                MessageBox.Show(ruta);
                 MessageBox.Show("Ruta registrada.");
 
             } catch(Exception err) {
@@ -43,9 +42,10 @@ namespace ADC__Android_Device_Connector_.Scrcpy {
 
             //Adaptamos el string para que funcione en la bd.
             //ruta = ruta.Replace(@"\", @"\\");
-
+            
             //Variables.
-            String query = "UPDATE Scrcpy SET rutaScrcpy= '" + ruta + "' WHERE idrutaScrcpy= " + 1;
+            Int32 id = 1;
+            String query = "UPDATE Scrcpy SET rutaScrcpy= '" + ruta + "'WHERE idrutaScrcpy= " + id;
 
             //Conexion con la base de datos.
             SQLiteConnection con = new SQLiteConnection("Data Source=adc.db;Version=3;");
@@ -65,7 +65,7 @@ namespace ADC__Android_Device_Connector_.Scrcpy {
                 con.Close(); //Cerrar conexion con la base de datos.
 
             }
-
+            con.Close(); //Cerrar conexion con la base de datos.
         }
 
         //Metodo para consultar la ruta.
@@ -87,49 +87,20 @@ namespace ADC__Android_Device_Connector_.Scrcpy {
             //Condicion para ver si hay algun dato leido.
             if(lec.Read() == true) {
                 path = lec["rutaScrcpy"].ToString();
+                lec.Close();
                 con.Close();
                 
                 return path;
 
             } else {
 
-                MessageBox.Show("Seleccione la ruta del programa Scrcpy");
+                lec.Close();
                 con.Close();
                 return null;
                 
-
             }
-            lec.Close();
+
         }
 
-
-
-
-
-
-
-
-
-
-
-
-        /* SQLiteCommand com = new SQLiteCommand("SELECT * FROM Scrcpy WHERE idrutaScrcpy= '" + 1 + "'", con);
-                            com.ExecuteNonQuery();
-
-                            SQLiteDataReader lec = com.ExecuteReader(); //Reader de la base de datos.
-
-                            //Condicion para ver si hay algun dato leido.
-                            if(lec.Read() == true) {
-
-                                String path = lec["rutaScrcpy"].ToString();
-
-                                MessageBox.Show(path);
-                            } else {
-
-                                MessageBox.Show("Seleccione la ruta del programa Scrcpy");
-                                //return null;
-
-                            }
-         */
     }
 }

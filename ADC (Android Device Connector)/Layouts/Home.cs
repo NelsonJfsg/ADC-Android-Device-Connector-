@@ -16,6 +16,7 @@ namespace ADC__Android_Device_Connector_.Layouts
     public partial class Home : Form
     {
 
+        //Variables
         String salida = null;
         Scrcpy.Scrcpy scrcpy = new Scrcpy.Scrcpy();
         DataBase.Device device = new DataBase.Device();
@@ -29,6 +30,7 @@ namespace ADC__Android_Device_Connector_.Layouts
         String argumentos;
         String resolucion;
 
+        //Comandos para el Scrcpy.
         String alwaysOnTop = "--always-on-top ";
         String noControl = "--no-control ";
         String renderExpiredFrames = "--render-expired-frames ";
@@ -36,6 +38,7 @@ namespace ADC__Android_Device_Connector_.Layouts
         String showTouches = "--show-touches ";
         String stayAwake = "--stay-awake ";
 
+        //Constructor.
         public Home() {
             InitializeComponent();
         }
@@ -54,8 +57,7 @@ namespace ADC__Android_Device_Connector_.Layouts
             SQLiteCommand comando = new SQLiteCommand(query, con);
             comando.ExecuteNonQuery();
             con.Close();
-            MessageBox.Show("Base de datos creada");
-
+            
             //Variables.
             String que = "CREATE TABLE IF NOT EXISTS devices(iddevice INTEGER PRIMARY KEY AUTOINCREMENT, nombre TEXT NOT NULL, direccionIp TEXT NOT NULL)";
 
@@ -65,9 +67,8 @@ namespace ADC__Android_Device_Connector_.Layouts
             SQLiteCommand com = new SQLiteCommand(que, con);
             com.ExecuteNonQuery();
             con.Close();
-            MessageBox.Show("Base de datos creada");
-
-
+            //con.Dispose();
+            
             //Estilo de grafico para la tabla.
             dataGVDevices.DefaultCellStyle.SelectionBackColor = Color.FromArgb(31, 31, 31);
             dataGVDevices.GridColor = Color.FromArgb(41, 41, 41);
@@ -88,13 +89,13 @@ namespace ADC__Android_Device_Connector_.Layouts
 
         }
 
-
         //Evento click para cambiar al layout de edicion.
         private void pbEditDevice_Click(object sender, EventArgs e) {
             
             EditDevice editDevice = new EditDevice();
             editDevice.setDGV(dataGVDevices);
 
+            //Verificamos que este seleccionado algun dispositivo.
             if(dataGVDevices.CurrentRow != null) {
                 String id = dataGVDevices.CurrentRow.Cells["iddevice"].Value.ToString();
                 editDevice.id = id;
@@ -112,6 +113,7 @@ namespace ADC__Android_Device_Connector_.Layouts
             newDevice.Show();
         }
 
+        //Evento click para el boton de la ruta.
         private void butPath_Click(object sender, EventArgs e) {
 
             //Abrirmos el layout para elegir la ruta.
@@ -119,18 +121,12 @@ namespace ADC__Android_Device_Connector_.Layouts
 
                 //Verificamos que se guarde correctamente la ruta.
                 if(fd.ShowDialog() == System.Windows.Forms.DialogResult.OK && !string.IsNullOrWhiteSpace(fd.SelectedPath)) {
-                
+
                     //Verificamos si ya existe una ruta o es nueva.
                     if(scrcpy.consultarRuta() != null) {
-                        
-                        MessageBox.Show("Actualizar ruta");
                         scrcpy.editarRuta(fd.SelectedPath.ToString());
-                        MessageBox.Show("Ruta recien editada: " + scrcpy.consultarRuta());
                     } else {
-
-                        MessageBox.Show("Registrar ruta");
-                        scrcpy.registrarRuta(fd.SelectedPath.ToString());
-                        MessageBox.Show(scrcpy.consultarRuta());
+                        scrcpy.registrarRuta(fd.SelectedPath.ToString());    
                     }
 
                 }
@@ -138,6 +134,7 @@ namespace ADC__Android_Device_Connector_.Layouts
 
         }
 
+        //Evento click para el boton conectar.
         private void butConnect_Click(object sender, EventArgs e) {
 
             //Seleccionamos la ip.
@@ -155,6 +152,7 @@ namespace ADC__Android_Device_Connector_.Layouts
             cmd.doneTask(task, rtbCMD); //Finalizamos la tarea.
         }
 
+        //Evento click para ver los dispositivos conectados.
         private void butDevices_Click(object sender, EventArgs e) {
 
             //Objeto para declarar la tarea.
@@ -169,6 +167,7 @@ namespace ADC__Android_Device_Connector_.Layouts
             
         }
 
+        //Evento click para reiniciar las conexiones.
         private void butKillServer_Click(object sender, EventArgs e) {
 
             //Objeto para declarar la tarea.
@@ -181,21 +180,19 @@ namespace ADC__Android_Device_Connector_.Layouts
 
             cmd.doneTask(task, rtbCMD); //Finalizamos la tarea.
 
-
         }
 
+        //Evento click para limpiar el rtb.
         private void butClear_Click(object sender, EventArgs e) {
 
-            Process task = new Process();
-            cmd.cambiarRuta(task);
-            task.StandardInput.WriteLine("cls");
             rtbCMD.Text = "";
-            cmd.doneTask(task, rtbCMD);
             
         }
 
+        //Evento click para eliminar un dispositivo.
         private void pbEliminarDispositivo_Click(object sender, EventArgs e) {
 
+            //Verificamos que haya un dispositivo seleccionado.
             if(dataGVDevices.CurrentRow != null) {
                 String id = dataGVDevices.CurrentRow.Cells["iddevice"].Value.ToString();
                 device.eliminarDispositivo(id);
@@ -206,10 +203,13 @@ namespace ADC__Android_Device_Connector_.Layouts
 
         }
 
+        //Evento click para iniciar la transmision de pantalla.
         private void butScreenMirror_Click(object sender, EventArgs e) {
 
+            //Variables
             String verificado = null;
 
+            //Buscamos la resolucion.
             foreach(RadioButton rb in gbResolucion.Controls) {
                 if(rb.Checked) {
 
@@ -259,11 +259,12 @@ namespace ADC__Android_Device_Connector_.Layouts
             
         }
 
+        //Metodo para verificar las opciones.
         public void verificarOpciones(GroupBox gb, String arg) {
 
             if(cbDisableControl.Checked && cbScreenOff.Checked) {
 
-                //MessageBox.Show("Modos no compatibles.");
+                MessageBox.Show("Modos no compatibles.");
 
             } else {
 
@@ -300,16 +301,16 @@ namespace ADC__Android_Device_Connector_.Layouts
 
                 }
 
-
-
             }
 
             argumentos = argumentos + arg;
 
         }
 
+        //Metodo para verificar la resolcuion.
         public void verificarResolucion(GroupBox gb, String args) {
 
+            //Buscamos el la resolucion seleccionada.
             foreach(RadioButton rb in gb.Controls) {
                 if(rb.Checked) {
 
@@ -325,7 +326,6 @@ namespace ADC__Android_Device_Connector_.Layouts
             resolucion = args;
 
         }
-
 
     }
 }

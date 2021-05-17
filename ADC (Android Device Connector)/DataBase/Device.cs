@@ -15,6 +15,7 @@ namespace ADC__Android_Device_Connector_.DataBase {
         public String nombre;
         public String ip;
 
+        //Metodo para cargar los dispositivos en el DGV.
         public void cargarDispositivos(DataGridView dataGridView, String tabla) {
 
             //Variables.
@@ -45,11 +46,9 @@ namespace ADC__Android_Device_Connector_.DataBase {
             DataGridViewColumn cLink = dataGridView.Columns[2]; //Guardamos la tercer columna.
             cLink.Width = 405; //Tamaño del link.
 
-            con.Close();
+            con.Close(); //Cerramos la conexion.
 
         }
-
-
 
         //Metodo para añadir dispositivos nuevos.
         public void añadirDispositivio(String nombre, String ip) {
@@ -88,9 +87,8 @@ namespace ADC__Android_Device_Connector_.DataBase {
             const string comillas = "\"";
 
             //Query
-            String que = "UPDATE devices SET nombre = " + comillas + nombre  + comillas + ", direccionIp = " + comillas + ip  + comillas + " WHERE iddevice = " + id;
+            String que = "UPDATE devices SET nombre = " + comillas + nombre  + comillas + ", direccionIp = " + comillas + ip  + comillas + " WHERE iddevice= " + id;
 
-            MessageBox.Show(que);
             //Conexion con la base de datos.
             SQLiteConnection con = new SQLiteConnection("Data Source=adc.db;Version=3;");
             con.Open();
@@ -163,7 +161,7 @@ namespace ADC__Android_Device_Connector_.DataBase {
                 //Aplicar comando para subir los datos.
                 SQLiteCommand comando = new SQLiteCommand(query, con);
                 comando.ExecuteNonQuery();
-                MessageBox.Show("Dispositivo eliminadao.");
+                MessageBox.Show("Dispositivo eliminado.");
 
             } catch(Exception er) {
 
